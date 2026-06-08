@@ -114,7 +114,7 @@
 
 ### 4.1 POC 路线
 
-目标：2 周内验证一块 2km x 2km 上海核心区能否进入目标引擎。
+目标：2 周内验证一块 2km x 2km 上海核心区能否完成真实数据拉取、标准化、质量检查和目标引擎加载。当前仓库已经实现第一步可执行流水线：通过 `config/poc-shanghai-core.json` 配置范围和图层，通过 `python3 -m city_twin_pipeline run-poc` 拉取真实 OpenStreetMap 数据并导出 GeoJSON、质量报告和数据台账。
 
 步骤：
 
@@ -136,6 +136,26 @@
 - 至少 1000 栋建筑可自动生成。
 - 路网可导入 SUMO 或等价系统进行基础交通流测试。
 - 数据来源和许可记录完整。
+
+当前可执行范围：
+
+- 已实现：OSM/Overpass 真实数据获取、建筑/道路/水系/绿地/POI 图层导出、tile_id 分块、数据台账、基础质量检查、Google 离线资产来源拦截。
+- 已实现：PostGIS SQL、LOD1 glTF、3D Tiles preview tileset、SUMO plain XML、OpenDRIVE baseline、本地 Web/Cesium 查看器、Unreal Engine 可导入项目包、Unreal Python 场景生成脚本和 MotrixSim 可导入场景包。
+- 未硬编码：POC bbox、数据源 endpoint、图层选择、楼层高度换算和质量阈值都来自配置文件。
+- 未 mock：运行时必须访问真实 Overpass API；缺失高度不会填假值。
+- 待扩展：Overture GeoParquet、DEM、真实 PostGIS 实例执行验证、SUMO netconvert 执行验证、在安装 Unreal Editor 的机器上执行导入验证、Unity 工程模板、授权高精地图、地标人工资产和商业合规审查。
+
+推荐命令：
+
+```bash
+python3 -m unittest discover -s tests
+python3 -m city_twin_pipeline run-poc \
+  --config config/poc-shanghai-core.json \
+  --output data/poc-shanghai-core \
+  --fail-on-quality
+```
+
+质量阈值应作为决策门禁，而不是造数据的理由。如果开放数据不足，应进入采购授权数据、自采数据或调整 POC 范围。
 
 ### 4.2 核心区路线
 
@@ -239,6 +259,7 @@
 - FBX：DCC 和传统引擎工作流。
 - OpenDRIVE：自动驾驶道路网络。
 - SUMO network：交通流仿真。
+- MotrixSim scene package：包含 `scene.xml`、`scene.urdf`、`scene.json`、视觉网格、碰撞网格和元数据，可作为机器人/物理仿真场景包。
 
 ## 8. 引擎落地方案
 
@@ -285,6 +306,21 @@
 - CARLA 负责车辆动力学、传感器和 3D 场景。
 - OpenDRIVE 需要人工检查复杂路口和高架。
 - 不要只用 OSM 自动转换结果作为高可信仿真地图。
+
+### 8.5 MotrixSim
+
+适合：机器人、物理仿真和本地 Web Viewer 场景验证。
+
+当前 POC 已生成 MotrixSim 包：
+
+- `data/poc-shanghai-core/motrix_scene/scene.xml`：MJCF 入口。
+- `data/poc-shanghai-core/motrix_scene/scene.urdf`：URDF 入口。
+- `data/poc-shanghai-core/motrix_scene/scene.json`：场景索引。
+- `data/poc-shanghai-core/motrix_scene/meshes/scene_visual.obj`：真实高度建筑视觉网格。
+- `data/poc-shanghai-core/motrix_scene/meshes/scene_collision.obj`：简化碰撞网格。
+- `data/poc-shanghai-core/motrix_scene.zip`：可拖入 MotrixSim Web Viewer 的压缩包。
+
+当前包使用 OSM 中真实 `height` 或 `building:levels` 派生高度生成建筑体块。缺少真实高度的建筑不会被填假高度。为了符合 MotrixSim/Real2Motrix 的 1000m 场景范围校验，2km 级 POC 会记录并应用 `source_to_motrix_scale`，比例写入 `metadata/asset_manifest.json`。
 
 ## 9. 团队和角色
 
@@ -432,4 +468,3 @@
 - Copernicus DEM: https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM
 - SUMO OpenStreetMap import: https://sumo.dlr.de/docs/Networks/Import/OpenStreetMap.html
 - CARLA OpenDRIVE standalone mode: https://carla.readthedocs.io/en/latest/adv_opendrive/
-

@@ -1,0 +1,116 @@
+{
+  "project": {
+    "name": "Shanghai City Digital Twin POC",
+    "area_name": "人民广场-南京东路-外滩 2km 级核心区",
+    "standard_crs": "EPSG:4326"
+  },
+  "poc_area": {
+    "south": 31.224,
+    "west": 121.47,
+    "north": 31.244,
+    "east": 121.4925
+  },
+  "sources": {
+    "osm": {
+      "endpoint": "http://overpass-api.de/api/interpreter",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors",
+      "timeout_seconds": 180
+    }
+  },
+  "layers": {
+    "buildings": [
+      {
+        "type": "way",
+        "tags": {
+          "building": "*"
+        }
+      }
+    ],
+    "roads": [
+      {
+        "type": "way",
+        "tags": {
+          "highway": "*"
+        }
+      }
+    ],
+    "water": [
+      {
+        "type": "way",
+        "tags": {
+          "natural": "water"
+        }
+      },
+      {
+        "type": "way",
+        "tags": {
+          "waterway": "riverbank"
+        }
+      }
+    ],
+    "green": [
+      {
+        "type": "way",
+        "tags": {
+          "leisure": "park"
+        }
+      },
+      {
+        "type": "way",
+        "tags": {
+          "landuse": "grass"
+        }
+      },
+      {
+        "type": "way",
+        "tags": {
+          "natural": "wood"
+        }
+      }
+    ],
+    "pois": [
+      {
+        "type": "node",
+        "tags": {
+          "amenity": "*"
+        }
+      },
+      {
+        "type": "node",
+        "tags": {
+          "tourism": "*"
+        }
+      },
+      {
+        "type": "node",
+        "tags": {
+          "shop": "*"
+        }
+      },
+      {
+        "type": "node",
+        "tags": {
+          "railway": "station"
+        }
+      },
+      {
+        "type": "node",
+        "tags": {
+          "public_transport": "station"
+        }
+      }
+    ]
+  },
+  "height": {
+    "level_height_m": 3.2
+  },
+  "quality": {
+    "minimum_counts": {
+      "buildings": 1000,
+      "roads": 200,
+      "water": 1,
+      "pois": 50
+    }
+  }
+}
