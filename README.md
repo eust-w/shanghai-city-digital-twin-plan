@@ -12,6 +12,8 @@
 
 - [需求说明](docs/01-requirements.md)
 - [实施方案](docs/02-implementation-plan.md)
+- [POC 运行手册](docs/03-poc-runbook.md)
+- [运行资产说明](docs/04-runtime-artifacts.md)
 
 ## 项目目标
 
@@ -24,5 +26,53 @@
 
 ## 当前状态
 
-当前仓库只包含需求和方案，不包含代码、地图数据、密钥或第三方素材。
+当前仓库包含：
 
+- 需求和实施方案。
+- 一个可执行的真实开放数据 POC 流水线。
+- PostGIS SQL、glTF、3D Tiles preview、SUMO、OpenDRIVE 和 Web 查看器导出。
+- Unreal Engine 可导入场景包：`.uproject`、OBJ 建筑体块、导入脚本和关卡生成脚本。
+- MotrixSim 可导入场景包：`scene.xml`、`scene.urdf`、`scene.json`、视觉 OBJ、碰撞 OBJ 和 ZIP 包。
+- 默认 POC 配置：`config/poc-shanghai-core.json`。
+
+仓库不包含密钥、Google 离线地图数据、第三方商业素材或生成后的大体量数据。运行输出默认写入 `data/`，该目录不纳入版本控制。
+
+## 快速运行
+
+```bash
+python3 -m unittest discover -s tests
+python3 -m city_twin_pipeline run-poc \
+  --config config/poc-shanghai-core.json \
+  --output data/poc-shanghai-core \
+  --fail-on-quality
+```
+
+该命令会从 Overpass API 拉取真实 OpenStreetMap 数据，并导出建筑、道路、水系、绿地、POI GeoJSON、质量报告、数据台账、PostGIS SQL、glTF、3D Tiles preview、SUMO、OpenDRIVE、本地 Web 查看器、Unreal Engine 可导入场景包和 MotrixSim 可导入场景包。不会使用 mock 数据，也不会把 Google Maps / Google Earth / Google 3D Tiles 作为离线资产来源。
+
+当 Overpass 网络不稳定时，可以使用已真实拉取的原始数据继续导出：
+
+```bash
+python3 -m city_twin_pipeline run-poc \
+  --config config/poc-shanghai-core.json \
+  --raw-input data/poc-shanghai-core/raw/osm_overpass.json \
+  --output data/poc-shanghai-core \
+  --fail-on-quality
+```
+
+查看器：
+
+```bash
+cd data/poc-shanghai-core
+python3 -m http.server 8765
+```
+
+打开 `http://localhost:8765/viewer/index.html`。
+
+Unreal 导入包位于 `data/poc-shanghai-core/unreal/`，压缩包为 `data/poc-shanghai-core/ShanghaiCityTwinPOC_UnrealImportPackage.zip`。有 Unreal Editor 的机器可执行：
+
+```bash
+/path/to/UnrealEditor data/poc-shanghai-core/unreal/ShanghaiCityTwinPOC.uproject \
+  -ExecutePythonScript=data/poc-shanghai-core/unreal/Scripts/import_city_twin_scene.py
+```
+
+MotrixSim 导入包位于 `data/poc-shanghai-core/motrix_scene/`，压缩包为 `data/poc-shanghai-core/motrix_scene.zip`。在 MotrixSim Web Viewer 中拖入该目录或解压后的目录，然后加载 `scene.xml`、`scene.urdf` 或 `scene.json`。
