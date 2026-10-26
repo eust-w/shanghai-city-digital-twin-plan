@@ -3,6 +3,7 @@ name = "shanghai-city-digital-twin-plan"
 version = "0.1.0"
 description = "Executable real-data POC pipeline for Shanghai city digital twin planning."
 requires-python = ">=3.9"
+license = "Apache-2.0"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

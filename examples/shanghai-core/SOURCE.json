@@ -1,0 +1,12 @@
+{
+  "source": "OpenStreetMap via Overpass API",
+  "license": "ODbL-1.0",
+  "copyright": "OpenStreetMap contributors",
+  "license_url": "https://www.openstreetmap.org/copyright",
+  "source_timestamp": "2026-06-08T04:18:00Z",
+  "config": "config/poc-shanghai-core.json",
+  "uncompressed_sha256": "7318afa1105f914c46071f7c439deaa9f7d39d3e779070f5ef74127f4e74da25",
+  "compressed_sha256": "b4bed85ffe626b41f6407a673615e5974d03afe4da98832deaeecd04c0ea771d",
+  "element_count": 24511,
+  "transform": "Lossless gzip only; no fabricated or filled data."
+}

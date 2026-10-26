@@ -1,0 +1,2 @@
+# Optional launch-video tooling only. Requires Python >=3.11.
+Pillow==13.0.0

@@ -1,6 +1,6 @@
 # 运行资产说明
 
-最后更新：2026-06-08
+最后更新：2026-10-26
 
 端到端 POC 会从真实 OpenStreetMap / Overpass 数据生成以下资产。所有输出默认位于 `data/poc-shanghai-core/`，不纳入 git 版本控制。
 
@@ -32,15 +32,15 @@ psql shanghai_city_twin_poc -f data/poc-shanghai-core/db/postgis_load.sql
 - `gltf/manifest.json`：导出统计、坐标原点、最高高度、跳过原因。
 - `3dtiles/buildings/tileset.json`：3D Tiles 1.1 preview tileset，指向 glTF 内容。
 
-建筑 extrusion 只使用 OSM `height` 或 `building:levels` 派生出的真实字段。缺失高度的建筑不会被填假高度；它们仍保留在 GeoJSON 和 PostGIS 中。
+建筑 extrusion 使用 OSM `height` 标签，或 `building:levels` 乘配置层高的估算值。二者都不等于本项目实测高度；来源记录在 `height_source`。两类字段都缺失的建筑不会被填默认高度，仍保留在 GeoJSON 和 PostGIS 中。
 
 ## 4. 仿真输入
 
 - `sim/sumo/shanghai_poc.nod.xml`：SUMO plain nodes。
 - `sim/sumo/shanghai_poc.edg.xml`：SUMO plain edges。
 - `sim/opendrive/shanghai_poc.xodr`：OpenDRIVE baseline 几何。
-- `motrix_scene/`：MotrixSim scene package。
-- `motrix_scene.zip`：MotrixSim 可导入压缩包。
+- `motrix_scene/`：面向 MotrixSim 的候选场景包。
+- `motrix_scene.zip`：候选压缩包，尚未完成 MotrixSim 原生验收。
 
 示例：
 
@@ -60,16 +60,13 @@ netconvert \
 - `motrix_scene/scene.json`：场景索引。
 - `motrix_scene/metadata/asset_manifest.json`：来源、缩放比例、mesh 统计和 bbox。
 - `motrix_scene/metadata/validation_report.json`：包结构和网格校验结果。
-- `motrix_scene.zip`：打包后的可导入 ZIP。
+- `motrix_scene.zip`：打包后的候选 ZIP。
 
-导入方式：
+导入边界：
 
-```text
-在 MotrixSim Web Viewer 中拖入 data/poc-shanghai-core/motrix_scene/
-或解压 data/poc-shanghai-core/motrix_scene.zip 后加载 scene.xml、scene.urdf 或 scene.json。
-```
+`scene.xml` 使用 MJCF，`scene.urdf` 使用 URDF；`scene.json` 是本项目场景索引，不应假设它是 MotrixSim 官方格式。应在指定版本的 MotrixSim 中确认支持的导入入口并记录实际运行结果。历史 MuJoCo 加载结果不能代替 MotrixSim 验收。
 
-当前包为了满足 1000m 场景范围校验，将真实 POC 范围按 `source_to_motrix_scale=0.40424188` 缩放到 MotrixSim 局部坐标。该比例记录在 `metadata/asset_manifest.json`，没有用假高度或补齐建筑。
+当前包为了满足本项目采用的 1000m 范围检查，按 `source_to_motrix_scale=0.40424188` 缩放。这个检查不是已核实的 MotrixSim 官方限制。缩放比例记录在 `metadata/asset_manifest.json`，因此本包不能直接用于真实尺度物理验证。碰撞体合并为单一 mesh，仍需验证目标引擎的凸包行为和建筑间道路可通行性。
 
 ## 5. Web 查看器
 
@@ -120,7 +117,7 @@ http://localhost:8765/viewer/index.html
 
 ## 7. 当前真实验证结果
 
-最近一次端到端运行：
+2026-10-26 使用 2026-06-08 的真实存档输入重跑（不是本次联网抓取）：
 
 - Quality：`pass`
 - Buildings：`2227`
@@ -134,7 +131,7 @@ http://localhost:8765/viewer/index.html
 - MotrixSim visual faces：`13732`
 - MotrixSim collision faces：`6876`
 - MotrixSim bbox：`898.37m x 929.56m x 89.74m`
-- MotrixSim validation：`pass`
-- 因缺少真实高度跳过建筑：`1654`
+- 本项目 Motrix 包结构与网格 validation：`pass`，不是原生引擎验收。
+- 因缺少高度或楼层数跳过建筑：`1654`
 - PostGIS SQL：`3.2M`
 - OpenDRIVE：`1.3M`
