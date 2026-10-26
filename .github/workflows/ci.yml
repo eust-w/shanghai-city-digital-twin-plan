@@ -9,9 +9,11 @@ permissions:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    # Python 3.9 is unavailable on the Ubuntu 26.04 latest image.
+    runs-on: ubuntu-22.04
     timeout-minutes: 10
     strategy:
+      fail-fast: false
       matrix:
         python: ["3.9", "3.12", "3.14"]
     steps:
