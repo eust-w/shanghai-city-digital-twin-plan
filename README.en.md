@@ -11,6 +11,12 @@ Actual exported geometry rendered in Blender, not an engine integration demo.
 Map data: Copyright OpenStreetMap contributors, ODbL. The display plane is not
 surveyed terrain. Most heights in this example are estimated from floor counts.
 
+## Downloads and Demo
+
+- [v0.1.0-alpha.1 pre-release](https://github.com/eust-w/shanghai-city-digital-twin-plan/releases/tag/v0.1.0-alpha.1): real example assets, introduction videos, subtitles, production metadata and SHA256 checksums.
+- [44-second video](https://www.douyin.com/video/7700918059808181504) | [X launch post](https://x.com/eustancewu/status/2114660223210430712). The 83-second landscape video is available in the release. Both use Chinese synthesized narration and Chinese subtitles.
+- [Release verification record](docs/07-release-record.md): 23 unit tests and real archived exports in CI on Python 3.9, 3.12 and 3.14.
+
 ## Run the Real Archived Example
 
 Python 3.9 or newer; no API key or third-party Python dependency for the core:

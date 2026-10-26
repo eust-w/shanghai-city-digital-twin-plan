@@ -8,6 +8,12 @@
 
 画面为实际 OBJ 渲染，不是 Unreal 或 MotrixSim 运行录像。数据来自 OpenStreetMap contributors，遵循 ODbL。建筑高度包含楼层估算；展示底板不是实测地形。
 
+## 下载与演示
+
+- [v0.1.0-alpha.1 预发布版](https://github.com/eust-w/shanghai-city-digital-twin-plan/releases/tag/v0.1.0-alpha.1)：真实样例资产、横竖版介绍视频、字幕、制作记录和 SHA256 校验清单。
+- [观看 44 秒介绍视频](https://www.douyin.com/video/7700918059808181504) · [X 发布帖](https://x.com/eustancewu/status/2114660223210430712)。横版主片约 83 秒，可从 Release 下载。
+- [发布与验证记录](docs/07-release-record.md)：23 项单元测试，以及 Python 3.9 / 3.12 / 3.14 上的真实存档导出 CI。
+
 核心原则：
 
 - Google Maps / Google Earth 适合作为在线视觉参考或流式可视化底图，不作为可离线导出、可编辑、可再发布的城市资产来源。
@@ -22,6 +28,7 @@
 - [运行资产说明](docs/04-runtime-artifacts.md)
 - [开源发布评估](docs/05-open-source-release.md)
 - [介绍视频与平台文案](docs/06-launch-campaign.md)
+- [发布与验证记录](docs/07-release-record.md)
 
 ## 项目目标
 
