@@ -1,6 +1,6 @@
 # 介绍视频与多平台发布文案
 
-状态：代码与 `v0.1.0-alpha.1` 已公开；抖音、X 正式作品页已核实。其余文案为待投递稿，不能据此认定已经发布。日期：2026-10-26。
+状态：代码与 `v0.1.0-alpha.1` 已公开；Bilibili、知乎、抖音、X 正式作品页已核实。其余文案为待投递稿，不能据此认定已经发布。日期：2026-10-26。
 
 源码：<https://github.com/eust-w/shanghai-city-digital-twin-plan>。视频、字幕和样例资产见 [Release](https://github.com/eust-w/shanghai-city-digital-twin-plan/releases/tag/v0.1.0-alpha.1)。实际发布验证见[发布记录](07-release-record.md)。
 

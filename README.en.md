@@ -14,7 +14,7 @@ surveyed terrain. Most heights in this example are estimated from floor counts.
 ## Downloads and Demo
 
 - [v0.1.0-alpha.1 pre-release](https://github.com/eust-w/shanghai-city-digital-twin-plan/releases/tag/v0.1.0-alpha.1): real example assets, introduction videos, subtitles, production metadata and SHA256 checksums.
-- [44-second video](https://www.douyin.com/video/7700918059808181504) | [X launch post](https://x.com/eustancewu/status/2114660223210430712). The 83-second landscape video is available in the release. Both use Chinese synthesized narration and Chinese subtitles.
+- [83-second video on Bilibili](https://www.bilibili.com/video/BV1CinZ6xEJN/) | [44-second video on Douyin](https://www.douyin.com/video/7700918059808181504) | [Zhihu introduction](https://www.zhihu.com/pin/2098141574253241817) | [X launch post](https://x.com/eustancewu/status/2114660223210430712). Videos and subtitles are also available in the release. Both formats use Chinese synthesized narration and Chinese subtitles.
 - [Release verification record](docs/07-release-record.md): 23 unit tests and real archived exports in CI on Python 3.9, 3.12 and 3.14.
 
 ## Run the Real Archived Example

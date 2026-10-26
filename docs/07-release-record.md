@@ -6,7 +6,7 @@
 
 - [公开源码](https://github.com/eust-w/shanghai-city-digital-twin-plan)，自有代码 Apache-2.0，地图数据独立遵循 ODbL。
 - [预发布版及下载](https://github.com/eust-w/shanghai-city-digital-twin-plan/releases/tag/v0.1.0-alpha.1)，对应代码 `074593092d4838809901e32551dac872a8125ddc`。后续文档提交可能领先此标签。
-- [抖音介绍视频](https://www.douyin.com/video/7700918059808181504)与 [X 发布帖](https://x.com/eustancewu/status/2114660223210430712)已打开正式作品页核实。其他平台不因存在账号或草稿而计为发布成功。
+- [Bilibili 主片](https://www.bilibili.com/video/BV1CinZ6xEJN/)、[知乎介绍](https://www.zhihu.com/pin/2098141574253241817)、[抖音短片](https://www.douyin.com/video/7700918059808181504)和 [X 发布帖](https://x.com/eustancewu/status/2114660223210430712)已打开正式作品页核实。其他平台不因存在账号或草稿而计为发布成功。
 
 ## 附件
 

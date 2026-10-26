@@ -11,7 +11,7 @@
 ## 下载与演示
 
 - [v0.1.0-alpha.1 预发布版](https://github.com/eust-w/shanghai-city-digital-twin-plan/releases/tag/v0.1.0-alpha.1)：真实样例资产、横竖版介绍视频、字幕、制作记录和 SHA256 校验清单。
-- [观看 44 秒介绍视频](https://www.douyin.com/video/7700918059808181504) · [X 发布帖](https://x.com/eustancewu/status/2114660223210430712)。横版主片约 83 秒，可从 Release 下载。
+- [B 站 83 秒主片](https://www.bilibili.com/video/BV1CinZ6xEJN/) · [抖音 44 秒短片](https://www.douyin.com/video/7700918059808181504) · [知乎介绍](https://www.zhihu.com/pin/2098141574253241817) · [X 发布帖](https://x.com/eustancewu/status/2114660223210430712)。视频与字幕也可从 Release 下载。
 - [发布与验证记录](docs/07-release-record.md)：23 项单元测试，以及 Python 3.9 / 3.12 / 3.14 上的真实存档导出 CI。
 
 核心原则：
